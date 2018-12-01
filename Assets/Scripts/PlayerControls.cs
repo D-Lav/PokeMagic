@@ -22,6 +22,11 @@ public class PlayerControls : MonoBehaviour {
         MovePlayer();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision!");
+    }
+
     private void GetMoveInput()
     {
         if (!moving)
