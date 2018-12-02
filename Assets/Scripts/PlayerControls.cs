@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour {
+    public GameObject playerPhysics;
+    public GameObject playerAnimation;
+    private Animator animator;
+
     private bool moving = false;
     private string direction;
     private float speed = 3;
     private Vector3 targetPosition;
-    private Animator animator;
 
     // Use this for initialization
     void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
+        animator = playerAnimation.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,6 +28,13 @@ public class PlayerControls : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision!");
+        moving = false;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("Collision!");
+        moving = false;
     }
 
     private void GetMoveInput()
@@ -60,7 +70,7 @@ public class PlayerControls : MonoBehaviour {
             }
             if (moving)
             {
-                targetPosition = transform.position;
+                targetPosition = playerPhysics.transform.position;
                 switch (direction)
                 {
                     case "left":
@@ -80,6 +90,7 @@ public class PlayerControls : MonoBehaviour {
                         animator.SetTrigger("top");
                         break;
                 }
+                playerPhysics.transform.position = targetPosition;
             }
         }
     }
@@ -89,8 +100,8 @@ public class PlayerControls : MonoBehaviour {
         if (moving)
         {
             float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
-            if (transform.position == targetPosition)
+            playerAnimation.transform.position = Vector3.MoveTowards(playerAnimation.transform.position, targetPosition, step);
+            if (playerAnimation.transform.position == targetPosition)
             {
                 moving = false;
             }
