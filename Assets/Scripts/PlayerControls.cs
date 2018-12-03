@@ -32,6 +32,18 @@ public class PlayerControls : MonoBehaviour
         MovePlayer();
     }
 
+    public void onPause()
+    {
+        animator.enabled = false;
+        speed = 0;
+    }
+    
+    public void onResume()
+    {
+        animator.enabled = true;
+        speed = 3;
+    }
+
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
         Vector2 start = playerPhysics.transform.position;

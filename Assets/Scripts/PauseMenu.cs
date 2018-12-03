@@ -7,20 +7,27 @@ public class PauseMenu : MonoBehaviour {
 
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-
+    PlayerControls player;
+    
 	// Update is called once per frame
 	void Update () {
+
+        player = gameObject.GetComponent<PlayerControls>();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
             {
+
                 Resume();
+                player.onResume();
             }
             else
             {
                 Pause();
                 defaulButton();
+                player.onPause();
+                
             }
         }
 
