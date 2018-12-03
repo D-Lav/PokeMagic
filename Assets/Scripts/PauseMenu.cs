@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class PauseMenu : MonoBehaviour {
             else
             {
                 Pause();
+                defaulButton();
             }
         }
 
@@ -36,5 +38,13 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+    }
+
+    void defaulButton()
+    {
+        GameObject selectedButton = GameObject.Find("PokedexButton");
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(selectedButton);
+
     }
 }
