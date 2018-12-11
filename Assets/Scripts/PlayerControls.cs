@@ -58,7 +58,7 @@ public class PlayerControls : MonoBehaviour
             //Debug.Log("no collision!");
             return true;
         }
-        Debug.Log("collision detected!");
+       // Debug.Log("collision detected!");
         SoundManager.instance.PlaySingle(wall);
         return false;
     }
